@@ -27,7 +27,7 @@ networks in a given structure.
 
     * ~Write script for neuronal network use.~
 
-    * Write script for neuronal network elimination.
+    * ~Write script for neuronal network elimination.~
 
 3. Write api's
 
