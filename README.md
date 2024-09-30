@@ -25,7 +25,7 @@ networks in a given structure.
 
     * ~Write script for neuronal network generation~~
 
-    * Write script for neuronal network use.
+    * ~Write script for neuronal network use.~
 
     * Write script for neuronal network elimination.
 
