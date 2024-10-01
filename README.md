@@ -36,6 +36,8 @@ networks in a given structure.
     * ~Write api to use the generated neuronal network.~
 
     * ~Write api to remove neuronal network.~
+    
+    * Write api that response the available models
 
 4. Create dashboard's page.
 
