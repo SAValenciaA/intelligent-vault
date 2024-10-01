@@ -8,7 +8,7 @@ export default  function Home() {
 
   // information required by pytorch to generate the
   // neuronal network
-  const [data, setData] = useState({
+  const [generateData, setGenerationData] = useState({
     password: "",
     secret: "",
     learningRate: "",
@@ -18,10 +18,32 @@ export default  function Home() {
     modelName: ""
   })
 
+  const [testingData, setTestingData] = useState({
+    modelName: "",
+    password: ""
+  })
+
+  const [testingResult, setTestingResult] = useState("")
+
+  const [generatingNN, setGenerationNN] = useState(true)
+
   async function handleSubmit() {
-    const response = await fetch("/api/generateNN", {
+
+    let url = ""
+    let method = ""
+    let body = ""
+
+    if (generatingNN) {
+      url = "/api/generateNN"
+      body = JSON.stringify(generateData)
+    } else {
+      url = "/api/useNN"
+      body = JSON.stringify(testingData)
+    }
+
+    const response = await fetch(url, {
       method: 'POST',
-      body: JSON.stringify(data)
+      body: body
     })
       .then((res) => {
         return res.text()
@@ -29,37 +51,93 @@ export default  function Home() {
       .then((text) => {
         return text
       })
+
+    if(!generatingNN) {
+      setTestingResult(response)
+    }
     
-    console.log(response)
   }
 
   function handleTextInput(event) {
     let name = event.target.name
     let value = event.target.value
-    setData({
-      ...data,
-      [name]: value
-    })
+    if(generatingNN) {
+      setGenerationData({
+        ...generateData,
+        [name]: value
+      })
+    } else {
+      setTestingData({
+        ...testingData,
+        [name]: value
+      })
+
+    }
   }
 
   return (
     <div className='body'>
-      {
-        Object.keys(data).map((key, idx) => {
-          return <div id="inputs">
-            <input 
-              key={idx}
-              type="text"
-              id={key + "Input"}
-              name={key}
-              placeholder={data[key]}
-              value={data[key]}
-              onChange={handleTextInput}
-            />
-          </div>
-        })
-      }
+
+      <button 
+        onClick={() => setGenerationNN(true)}>
+        generate neuronal network
+      </button>
+      <button
+        onClick={() => setGenerationNN(false)}>
+        use neuronal network
+      </button>
+
+      <div 
+        id="generationInputs" 
+        style={{
+          opacity: generatingNN ? '1' : '0'
+        }}
+      >
+        {
+          Object.keys(generateData).map((key, idx) => {
+            return(
+                <input 
+                  key={idx}
+                  type="text"
+                  id={key + "GenerationInputs"}
+                  name={key}
+                  placeholder={generateData[key]}
+                  value={generateData[key]}
+                  onChange={handleTextInput}
+                />
+            )
+          })
+        }
+      </div>
+
+      <div
+        id="testingInputs"
+        style={{
+          opacity: generatingNN ? '0' : '1'
+        }}
+      >
+        {
+          Object.keys(testingData).map((key, idx) => {
+            return(
+                <input 
+                  key={idx}
+                  type="text"
+                  id={key + "TestingInputs"}
+                  name={key}
+                  placeholder={testingData[key]}
+                  value={testingData[key]}
+                  onChange={handleTextInput}
+                />
+            )
+          })
+        }
+
+        <div>{testingResult}</div>
+
+      </div>
+
       <button onClick={handleSubmit}>Start Training</button>
+
     </div>
   );
 }
