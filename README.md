@@ -15,3 +15,13 @@ Nextjs is used as the frontend and backend of the app, which show a dashboard in
 3000 by default. The dashboard allow run pytorch scripts that generate, use, change and remove neuronal
 networks in a given structure.
 
+# Usage
+
+Download and start in dev mode with:
+```bash
+$ git clone https://SAValenciaA/intelligent-vault;
+$ cd intelligent-vault;
+$ npx next dev;
+```
+And done, you can create, and interact with your models
+entering localhost:3000
