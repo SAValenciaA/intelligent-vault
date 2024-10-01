@@ -194,7 +194,11 @@ export default  function Home() {
 
       </div>
       <div className="modelsList">
-        <button onClick={refreshList}>Refresh</button>
+        <button className="refreshButton"
+          onClick={refreshList}>
+          Refresh
+        </button>
+
         {modelsList.slice(0,-1).map((item, idx) => {
 
           return(
