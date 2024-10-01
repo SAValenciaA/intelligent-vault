@@ -66,6 +66,7 @@ def train_model(password: str, secret: str, lr: float, max_epochs: int,
             print("acc: ", acc_ratio)
             # if the model is good enough, just return it
             if acc_ratio >= 0.98:
+                print(Normalize.denormalize(test_pred))
                 return best_model
 
     return best_model
@@ -106,10 +107,15 @@ if __name__ == "__main__":
     # docs recomendation, idk y
     model.eval()
 
+    # path to the script's dir
+    script_path = os.path.dirname(__file__)
+
+    print(script_path)
+
     # create folder in which save mode
-    os.makedirs(f"./models/{model_name}")
+    os.makedirs(f"{script_path}/models/{model_name}")
     # save model
-    torch.save(best_model_dict, f"./models/{model_name}/model.pt")
+    torch.save(best_model_dict, f"{script_path}/models/{model_name}/model.pt")
     # save model shape for future use
     Template.createNewMetadataFile(input_size, hidden_layer_neurons,
                                    hidden_layers, output_size,
