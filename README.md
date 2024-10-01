@@ -33,11 +33,13 @@ networks in a given structure.
 
     * ~Write api for neuronal network generation given a secret and a password and saving it.~
 
-    * Write api to use the generated neuronal network.
+    * ~Write api to use the generated neuronal network.~
 
     * Write api to remove neuronal network.
 
 4. Create dashboard's page.
+
+    * Add style to it.
 
     * Use the colors: 
         - Violet: #845ec2
