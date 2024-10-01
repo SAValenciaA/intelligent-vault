@@ -11,13 +11,13 @@ export async function POST(req) {
     'python', 
     [
       "app/scripts/generateNN.py", 
-      body["password"],
-      body["secret"],
-      body["learningRate"],
-      body["maxEpochs"],
-      body["hiddenLayers"],
-      body["extraNeurons"],
-      body["modelName"]
+      body["Password"],
+      body["Secret"],
+      body["Learning_rate"],
+      body["Max_epochs"],
+      body["Hidden_layers"],
+      body["Extra_neurons"],
+      body["Model_name"]
     ]
   )
   generateNN.stdout.on('data', (data) => {

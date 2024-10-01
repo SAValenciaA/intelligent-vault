@@ -9,8 +9,8 @@ export async function POST(req) {
     'python', 
     [
       "app/scripts/useNN.py", 
-      body["modelName"],
-      body["password"],
+      body["Model_name"],
+      body["Password"],
     ]
   )
 

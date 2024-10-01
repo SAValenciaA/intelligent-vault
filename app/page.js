@@ -2,6 +2,7 @@
 // This page is the dashboard of the app
 import Image from "next/image";
 import { useState } from 'react';
+import './globals.css';
 
 
 export default  function Home() {
@@ -9,23 +10,24 @@ export default  function Home() {
   // information required by pytorch to generate the
   // neuronal network
   const [generateData, setGenerationData] = useState({
-    password: "",
-    secret: "",
-    learningRate: "",
-    extraNeurons: "0",
-    maxEpochs: "0",
-    hiddenLayers: "3",
-    modelName: ""
+    Model_name: "",
+    Password: "",
+    Secret: "",
+    Learning_rate: "0.0001",
+    Extra_neurons: "0",
+    Max_epochs: "8000",
+    Hidden_layers: "3",
+    Min_match: "95"
   })
 
   const [testingData, setTestingData] = useState({
-    modelName: "",
-    password: ""
+    Model_name: "",
+    Password: ""
   })
 
   const [testingResult, setTestingResult] = useState("")
 
-  const [generatingNN, setGenerationNN] = useState(true)
+  const [generatingNN, setGeneratingNN] = useState(true)
 
   async function handleSubmit() {
 
@@ -76,35 +78,46 @@ export default  function Home() {
   }
 
   return (
-    <div className='body'>
+    <div className='form'>
 
       <button 
-        onClick={() => setGenerationNN(true)}>
+        onClick={() => setGeneratingNN(true)}
+        id="generateButton"
+      >
         generate neuronal network
       </button>
       <button
-        onClick={() => setGenerationNN(false)}>
+        onClick={() => setGeneratingNN(false)}
+        id="useButton"
+      >
         use neuronal network
       </button>
 
       <div 
         id="generationInputs" 
         style={{
-          opacity: generatingNN ? '1' : '0'
+          opacity: generatingNN ? '1' : '0',
+          zIndex: generatingNN ? 1 : -1
         }}
       >
         {
           Object.keys(generateData).map((key, idx) => {
             return(
-                <input 
-                  key={idx}
-                  type="text"
-                  id={key + "GenerationInputs"}
-                  name={key}
-                  placeholder={generateData[key]}
-                  value={generateData[key]}
-                  onChange={handleTextInput}
-                />
+                <label>
+                  {key.replace("_", " ")}
+                  <input 
+                    type={
+                      key == "Password" || key == "Secret" ? 
+                        "password" : "text"
+                    }
+                    key={idx}
+                    id={key + "GenerationInputs"}
+                    name={key}
+                    placeholder={generateData[key]}
+                    value={generateData[key]}
+                    onChange={handleTextInput}
+                  />
+                </label>
             )
           })
         }
@@ -113,30 +126,41 @@ export default  function Home() {
       <div
         id="testingInputs"
         style={{
-          opacity: generatingNN ? '0' : '1'
+          opacity: generatingNN ? '0' : '1',
+          zIndex: generatingNN ? -1 : 1
         }}
       >
         {
           Object.keys(testingData).map((key, idx) => {
             return(
+              <label>
+                {key.replace("_", " ")}
                 <input 
                   key={idx}
-                  type="text"
+                  type={
+                    key == "Password" ?
+                      "password" : "text"
+                  }
                   id={key + "TestingInputs"}
                   name={key}
                   placeholder={testingData[key]}
                   value={testingData[key]}
                   onChange={handleTextInput}
                 />
+              </label>
             )
           })
         }
-
-        <div>{testingResult}</div>
+        <p className="testingResult">{testingResult}</p>
 
       </div>
 
-      <button onClick={handleSubmit}>Start Training</button>
+      <button 
+        className="sendButton" 
+        onClick={handleSubmit}
+      >
+        Send
+      </button>
 
     </div>
   );

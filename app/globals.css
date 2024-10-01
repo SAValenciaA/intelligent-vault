@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+  --dark: #222222;
+  --teal: #00c9a7;
+  --white: #fbeaff;
+  --lightViolet: #b39cd0;
+  --violet: #845ec2;
+}
+* {
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #222222;
+}
+
+body {
+  background-color: var(--dark);
+}
+label {
+  font-size: 15px;
+}
+input {
+  background: transparent;
+  border: 3px var(--dark) solid;
+  display: block;
+  width: 60%;
+  height: 30px;
+  font-size: 16px;
+}
+input:focus, input:active, input:focus-within, 
+input:focus-visible, input:target{
+  outline: none;
+}
+button {
+  background: none;
+  border: none;
+  padding: 10px;
+  height: fit-content;
+  font-size: 1em;
+  outline: none;
+}
+
+.form {
+  position: absolute;
+  width: 50vw;
+  height: 90vh;
+  background: -moz-linear-gradient(270deg, var(--violet) 0%, var(--teal) 100%);
+  margin-top: auto;
+  margin-bottom: auto;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-between;
+  justify-content: space-around;
+}
+.form * {
+  margin: 5px;
+}
+
+#useButton, #generateButton {
+  transition-duration: 0.7s;
+  width: 45%;
+}
+#useButton:hover, #generateButton:hover, .sendButton:hover {
+  background-color: var(--dark);
+  color: var(--white)
+}
+.sendButton {
+  width: 45vw;
+  transition-duration: 0.7s;
+  align-self: flex-end;
+}
+
+#generationInputs, #testingInputs {
+  align-content: flex-start;
+}
+#generationInputs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#testingInputs {
+  position: absolute;
+  transform: translateY(30%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.testingResult {
+  width: 36vw;
+  height: fit-content;
+  min-height: 20vh;
+  word-wrap: break-word;
+  padding: 13px;
+  margin-top: 20px;
+  background-color: var(--dark);
+  color: var(--white);
+}
+
+#PasswordTestingInputs, #Model_nameTestingInputs{
+  width: 40vw;
+}
+
+#Model_nameGenerationInputs, #PasswordGenerationInputs {
+  width: 22vw;
+}
+#SecretGenerationInputs {
+  width: 45vw;
+}
+#Learning_rateGenerationInputs, #Extra_neuronsGenerationInputs,
+#Max_epochsGenerationInputs, #Hidden_layersGenerationInputs,
+#Min_matchGenerationInputs{
+  width: 4em;
+}
