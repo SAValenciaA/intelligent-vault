@@ -4,6 +4,8 @@ const { spawn } = require('node:child_process');
 
 export async function POST(req) {
 
+  const body = await req.json()
+
   // TODO: make the scripts accept json inputs so this is shorter
   const generateNN = spawn(
     'python', 
