@@ -12,7 +12,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Mode that recognizes password
 def train_model(password: str, secret: str, lr: float, max_epochs: int, 
-             model: nn.Module):
+                model: nn.Module, min_match: float):
 
     optimizer = torch.optim.Adam(params=model.parameters(), lr=lr)
 
@@ -65,8 +65,8 @@ def train_model(password: str, secret: str, lr: float, max_epochs: int,
             best_model = model.state_dict()
             print("acc: ", acc_ratio)
             # if the model is good enough, just return it
-            if acc_ratio >= 0.98:
-                print(Normalize.denormalize(test_pred))
+            if acc_ratio >= min_match:
+                print(acc_ratio)
                 return best_model
 
     return best_model
@@ -76,13 +76,14 @@ if __name__ == "__main__":
     passwordModel = Model.passwordModel
 
     # Variables got as arguments
-    password = sys.argv[1]
+    password = sys.argv[1][:len(sys.argv[1])]
     secret = sys.argv[2]
     lr = float(sys.argv[3])
     max_epochs = int(sys.argv[4])
     hidden_layers = int(sys.argv[5])
     extra_neurons = int(sys.argv[6])
-    model_name = sys.argv[7]
+    min_match = int(sys.argv[7])
+    model_name = sys.argv[8]
 
     # Define neuronal network shsape
     #  input layer
@@ -102,15 +103,14 @@ if __name__ == "__main__":
                           output_size).to(device)
 
     # get best model from training
-    best_model_dict = train_model(password, secret, lr, max_epochs, model)
+    best_model_dict = train_model(password, secret, lr, max_epochs,
+                                  model, min_match/100)
 
     # docs recomendation, idk y
     model.eval()
 
     # path to the script's dir
     script_path = os.path.dirname(__file__)
-
-    print(script_path)
 
     # create folder in which save mode
     os.makedirs(f"{script_path}/models/{model_name}")
@@ -120,3 +120,4 @@ if __name__ == "__main__":
     Template.createNewMetadataFile(input_size, hidden_layer_neurons,
                                    hidden_layers, output_size,
                                    model_name)
+    print("Code ran successfully")

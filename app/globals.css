@@ -16,6 +16,8 @@
 
 body {
   background-color: var(--dark);
+  padding: 0;
+  margin: 0;
 }
 label {
   font-size: 15px;
@@ -42,14 +44,9 @@ button {
 }
 
 .form {
-  position: absolute;
-  width: 50vw;
+  width: 47vw;
   height: 90vh;
-  background: -moz-linear-gradient(270deg, var(--violet) 0%, var(--teal) 100%);
-  margin-top: auto;
-  margin-bottom: auto;
-  top: 0;
-  bottom: 0;
+  background: linear-gradient(180deg, var(--violet) 0%, var(--teal) 100%);
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -64,6 +61,7 @@ button {
   transition-duration: 0.7s;
   width: 45%;
 }
+
 #useButton:hover, #generateButton:hover, .sendButton:hover {
   background-color: var(--dark);
   color: var(--white)
@@ -110,12 +108,61 @@ button {
 
 #Model_nameGenerationInputs, #PasswordGenerationInputs {
   width: 22vw;
+  min-width: 180px;
 }
 #SecretGenerationInputs {
   width: 45vw;
+  min-width: 400px;
 }
 #Learning_rateGenerationInputs, #Extra_neuronsGenerationInputs,
 #Max_epochsGenerationInputs, #Hidden_layersGenerationInputs,
 #Min_matchGenerationInputs{
   width: 4em;
+}
+
+
+.body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.modelsList {
+  width: 47vw;
+  height: 90vh;
+  background-color: var(--white);
+}
+
+.modelContainer {
+  display: flex;
+  align-content: center;
+  padding: 10px;
+  margin: 10px;
+  border: 3px var(--dark) solid;
+}
+.removeButton{
+  padding: 0;
+  margin-left: auto;
+}
+.refreshButton::hover{
+  background-color: var(--dark);
+  color: var(--white)
+}
+
+.form, .modelsList {
+  min-width: 450px;
+}
+@media only screen and (max-width: 900px) {
+  .body{
+    flex-direction: column;
+    height: fit-content;
+    gap: 10px;
+  }
+  .modelContainer {
+    margin-top: 10px
+  }
 }

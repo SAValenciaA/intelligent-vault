@@ -1,7 +1,5 @@
 const { spawn } = require('node:child_process');
 
-
-
 export async function POST(req) {
 
   const body = await req.json()
@@ -17,6 +15,7 @@ export async function POST(req) {
       body["Max_epochs"],
       body["Hidden_layers"],
       body["Extra_neurons"],
+      body["Min_match"],
       body["Model_name"]
     ]
   )
