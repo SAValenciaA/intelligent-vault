@@ -8,8 +8,9 @@ import Normalize
 def main():
     script_path = os.path.dirname(__file__)
     model_name = sys.argv[1]
-    text_input = sys.argv[2]
     model_shape = Template.readMetadataFile(model_name)
+    # this is only a temporal solution to avoid inputs too big
+    text_input = sys.argv[2][:model_shape['input_size']] + (" "* (-len(sys.argv[2]) + model_shape['input_size']))
     model = Model.passwordModel(model_shape['input_size'], 
                                 model_shape['hidden_layer_neurons'],
                                 model_shape['hidden_layers'],
